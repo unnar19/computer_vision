@@ -2,10 +2,10 @@ import cv2
 import time
 import os
 
-os.environ['OPENCV_FFMPEG_CAPTURE_OPTIONS'] = 'rtsp_transport;tcp;buffer_size;2'
-cap = cv2.VideoCapture('rtsp://192.168.1.38/video', cv2.CAP_FFMPEG)
+#os.environ['OPENCV_FFMPEG_CAPTURE_OPTIONS'] = 'rtsp_transport;tcp;buffer_size;4096'
+#cap = cv2.VideoCapture('rtsp://10.1.19.46/video', cv2.CAP_FFMPEG)
 
-#cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0)
 
 (w,h) = (int(cap.get(3)), int(cap.get(4)))
 

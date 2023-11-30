@@ -1,6 +1,7 @@
 import cv2
 import time
 import random
+import os
 import numpy as np
 
 def ransac(coords, delta, iterations):
@@ -39,6 +40,10 @@ def ransac(coords, delta, iterations):
 
 cap = cv2.VideoCapture(0)
 
+#os.environ['OPENCV_FFMPEG_CAPTURE_OPTIONS'] = 'rtsp_transport;tcp;buffer_size;2'
+#cap = cv2.VideoCapture('rtsp://10.1.19.46/video', cv2.CAP_FFMPEG)
+
+
 (w,h) = (int(cap.get(3)), int(cap.get(4)))
 
 prev_time = time.time()
@@ -55,13 +60,13 @@ while(True):
 
     ret, frame = cap.read()
 
-    edge = cv2.Canny(frame,70,300)
+    edge = cv2.Canny(frame,90,100)
 
     white = cv2.findNonZero(edge)
 
     if type(white) != type(None):
 
-        (m, b), best, score = ransac(white,0.9,40)
+        (m, b), best, score = ransac(white,0.9,300)
 
         if np.isnan(b) == False: 
             cv2.line(frame, (0,int(b)), (w,int(m*w+b)), (255,255,255), 2)
